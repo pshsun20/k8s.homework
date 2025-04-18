@@ -18,6 +18,9 @@ kind: Deployment
 metadata:
   name: aws9-deploy-blog
   namespace: aws9c
+  annotations:
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: SkipReplicaDiff=true
 spec:
   replicas: 1
   selector:
