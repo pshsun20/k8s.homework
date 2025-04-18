@@ -18,11 +18,7 @@ kind: Deployment
 metadata:
   name: aws9-deploy-blog
   namespace: aws9c
-  annotations:
-    argocd.argoproj.io/compare-options: IgnoreExtraneous         # 🍊 ArgoCD가 클러스터에만 있는 필드를 무시
-    argocd.argoproj.io/sync-options: SkipReplicaDiff=true        # 🍊 ArgoCD가 replicas 필드 차이를 무시
 spec:
-  replicas: 1  # 기본 값이지만 KEDA나 HPA에 의해 무시될 수 있음
   selector:
     matchLabels:
       color: black  # 이 라벨을 가진 Pod들을 대상으로 관리
