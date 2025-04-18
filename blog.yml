@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
         - name: aws9c-blog
-          image: brian24/aws9:blog
+          image: brian24/aws9:blue
           ports:
             - containerPort: 80
           resources:
