@@ -40,18 +40,3 @@ spec:
             requests:
               memory: "32Mi"
               cpu: "250m"
----
-apiVersion: autoscaling/v1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: aws9-hpa
-  namespace: aws9c
-spec:
-  maxReplicas: 15
-  minReplicas: 1
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: aws9-deploy-blog     # ✅ 오타 수정
-  targetCPUUtilizationPercentage: 60
----
