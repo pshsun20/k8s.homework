@@ -6,12 +6,12 @@ metadata:
   namespace: aws9c
 spec:
   selector:
-    color: black
+    color: black  # 이 label을 가진 Pod와 연결
   ports:
     - protocol: TCP
-      port: 80
-      targetPort: 80
-  type: LoadBalancer
+      port: 80         # 외부에서 접근할 포트
+      targetPort: 80   # 컨테이너 내부 포트
+  type: LoadBalancer   # 외부에서 접근 가능한 LoadBalancer 타입 서비스
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -19,27 +19,27 @@ metadata:
   name: aws9-deploy-blog
   namespace: aws9c
   annotations:
-    argocd.argoproj.io/compare-options: IgnoreExtraneous
-    argocd.argoproj.io/sync-options: SkipReplicaDiff=true
+    argocd.argoproj.io/compare-options: IgnoreExtraneous         # 🍊 ArgoCD가 클러스터에만 있는 필드를 무시
+    argocd.argoproj.io/sync-options: SkipReplicaDiff=true        # 🍊 ArgoCD가 replicas 필드 차이를 무시
 spec:
-  replicas: 1
+  replicas: 1  # 기본 값이지만 KEDA나 HPA에 의해 무시될 수 있음
   selector:
     matchLabels:
-      color: black
+      color: black  # 이 라벨을 가진 Pod들을 대상으로 관리
   template:
     metadata:
       labels:
-        color: black
+        color: black  # Pod에 적용될 라벨 (Service와 연결되기 위해 동일해야 함)
     spec:
       containers:
         - name: aws9c-blog
-          image: brian24/aws9:blue
+          image: brian24/aws9:blue  # 사용될 컨테이너 이미지
           ports:
-            - containerPort: 80
+            - containerPort: 80     # 컨테이너에서 열리는 포트
           resources:
             limits:
-              memory: "64Mi"
-              cpu: "500m"
+              memory: "64Mi"        # 최대 메모리 사용량
+              cpu: "500m"           # 최대 CPU 사용량
             requests:
-              memory: "32Mi"
-              cpu: "250m"
+              memory: "32Mi"        # 최소 보장 메모리
+              cpu: "250m"           # 최소 보장 CPU
