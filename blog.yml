@@ -23,6 +23,10 @@ spec:
     matchLabels:
       color: black  # 이 라벨을 가진 Pod들을 대상으로 관리
   template:
+    spec:
+      imagePullSecrets:
+        - name: regcred   # 🍊 방금 만든 secret 이름
+  template:
     metadata:
       labels:
         color: black  # Pod에 적용될 라벨 (Service와 연결되기 위해 동일해야 함)
