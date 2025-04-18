@@ -29,4 +29,4 @@ spec:
     protocol: TCP
     targetPort: 80    # 컨테이너의 포트 
   selector:
-    color: blue 
+    color: blue
