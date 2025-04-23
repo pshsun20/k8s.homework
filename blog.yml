@@ -41,3 +41,10 @@ spec:
             requests:
               memory: "32Mi"        # 최소 보장 메모리
               cpu: "250m"           # 최소 보장 CPU
+          volumeMounts:
+            - name: blog-storage     # 🍊 볼륨 이름
+              mountPath: /usr/share/nginx/html  # 🍊 컨테이너 내부 마운트 위치 (예시)
+      volumes:
+        - name: blog-storage
+          persistentVolumeClaim:
+            claimName: dev1-pvc     # 🍊 PVC 이름 (이미 생성되어 있어야 함)
