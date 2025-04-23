@@ -33,7 +33,7 @@ spec:
     spec:
       containers:
         - name: aws9c-blog
-          image: hub.aws9.pri/aws9/blog:latest  # 사용될 컨테이너 이미지
+          image: hub.aws9.pri/aws9/blog  # 사용될 컨테이너 이미지
           ports:
             - containerPort: 80     # 컨테이너에서 열리는 포트
           resources:
