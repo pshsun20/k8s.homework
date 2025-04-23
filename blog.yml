@@ -23,14 +23,12 @@ spec:
     matchLabels:
       color: black  # 이 라벨을 가진 Pod들을 대상으로 관리
   template:
-    spec:
-      imagePullSecrets:
-        - name: regcred   # 🍊 방금 만든 secret 이름
-  template:
     metadata:
       labels:
         color: black  # Pod에 적용될 라벨 (Service와 연결되기 위해 동일해야 함)
     spec:
+      imagePullSecrets:   # 🍊 여기에만 정의하면 충분함
+        - name: regcred
       containers:
         - name: aws9c-blog
           image: hub.aws9.pri/aws9/blog  # 사용될 컨테이너 이미지
